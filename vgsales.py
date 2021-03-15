@@ -15,11 +15,11 @@ from sklearn.tree import DecisionTreeRegressor
 from sklearn.metrics import mean_squared_error
 
 
-# Analysis Question 1
-
-
 def plot_global_genres(data):
-    # Analyze the global trends by genre
+    """
+    Generate a pie chart displaying the global sales of each genre type
+    that is present in the merged data frame.
+    """
     global_genre_success_df = data.filter(['Genre', 'Global_Sales']).dropna()
     fig = px.pie(global_genre_success_df, values='Global_Sales', names='Genre')
     fig.update_traces(textposition='inside', textinfo='label')
@@ -30,7 +30,10 @@ def plot_global_genres(data):
 
 
 def plot_global_esrb(data):
-    # Global ESRB trends
+    """
+    Generate a pie chart displaying the global sales of each ESRB type
+    that is present in the merged data frame.
+    """
     global_ESRB_success_df = data.filter(['ESRB_Rating',
                                           'Global_Sales']).dropna()
     fig = px.pie(global_ESRB_success_df, values='Global_Sales',
@@ -43,7 +46,9 @@ def plot_global_esrb(data):
 
 
 def plot_global_publishers(data):
-    # Analyze global publisher success
+    """
+    Generate a bar chart displaying the global sales of the top 10 publishers.
+    """
     global_pub_success_df = data.filter(['Publisher', 'Genre',
                                          'Global_Sales']).dropna()
     top_pubs = global_pub_success_df.groupby('Publisher')['Global_Sales'].sum()
@@ -58,10 +63,11 @@ def plot_global_publishers(data):
     fig.write_image('global_publishers.png')
 
 
-# Analysis Question 2
-
-
 def plot_na_genres(data):
+    """
+    Isolate the North American Sales and evaluate which genres are most popular
+    by generating a pie chart.
+    """
     na_genre_success_df = data.filter(['Genre', 'NA_Sales']).dropna()
     fig = px.pie(na_genre_success_df, values='NA_Sales', names='Genre')
     fig.update_traces(textposition='inside', textinfo='label')
@@ -72,6 +78,10 @@ def plot_na_genres(data):
 
 
 def plot_eu_genres(data):
+    """
+    Isolate the European Sales and evaluate which genres are most popular
+    by generating a pie chart.
+    """
     eu_genre_success_df = data.filter(['Genre', 'EU_Sales']).dropna()
     fig = px.pie(eu_genre_success_df, values='EU_Sales', names='Genre')
     fig.update_traces(textposition='inside', textinfo='label')
@@ -82,6 +92,10 @@ def plot_eu_genres(data):
 
 
 def plot_jp_genres(data):
+    """
+    Isolate the Japanese Sales and evaluate which genres are most popular
+    by generating a pie chart.
+    """
     jp_genre_success_df = data.filter(['Genre', 'JP_Sales']).dropna()
     fig = px.pie(jp_genre_success_df, values='JP_Sales', names='Genre')
     fig.update_traces(textposition='inside', textinfo='label')
@@ -92,7 +106,11 @@ def plot_jp_genres(data):
 
 
 def plot_top_publishers_regional(data):
-    # Analyze publisher success across the 3 markets
+    """
+    Using the merged data frame, find the top 10 publishers in the world
+    and then create a grouped bar chart that displays how each of those
+    publishers perform in each of the 3 regions of our sales data.
+    """
     reg_pub_df = data.filter(['Publisher', 'NA_Sales',
                               'EU_Sales', 'JP_Sales',
                               'Global_Sales']).dropna()
@@ -119,12 +137,12 @@ def plot_top_publishers_regional(data):
     fig.write_image('top_publishers_regional.png')
 
 
-# Analysis Question 3
-
-
 def plot_critic_correlation(data):
-    # First we'll look for any correlation between the critic score and the
-    # total units shipped
+    """
+    Evaluate the relationship between critic review scores and global sales
+    by generating a scatter plot with a regression line of all of the games
+    that we have both sales data for and critic data for.
+    """
     critic_success_df = data.filter(['Critic_Score', 'Global_Sales', 'Name'])
     critic_success_df = critic_success_df.dropna()
     fig = px.scatter(critic_success_df, x='Critic_Score', y='Global_Sales',
@@ -139,10 +157,15 @@ def plot_critic_correlation(data):
     fig.write_image('critic_sales_correlation.png')
 
 
-# Analysis Question 4
-
-
 def predict_country(data):
+    """
+    Create a machine learning model that attempts to predict which region
+    a game sold the most in. The features in the model will include genre,
+    platform, developer, critic score, and esrb rating while the labels
+    will be the sales data in each respective region. The labels will be
+    converted into a single column that identifies which country the game
+    performed best in.
+    """
     # Filter data to columns needed
     temp = data[['Genre', 'Platform', 'Developer', 'Critic_Score',
                  'ESRB_Rating', 'NA_Sales', 'EU_Sales', 'JP_Sales']]
@@ -171,7 +194,12 @@ def predict_country(data):
 
 
 def predict_sales(data):
-
+    """
+    Attempt to create a machine learning model that predicts the sales
+    amount of a game using the genre, platform, developer, critic score,
+    and esrb rating as features. This is likely to be unsuccessful due to
+    the nuanced nature of sales and the lack of data in the data set.
+    """
     temp = data[['Genre', 'Platform', 'Developer', 'Critic_Score',
                  'ESRB_Rating', 'Global_Sales']]
     temp = temp.dropna()
