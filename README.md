@@ -1,7 +1,5 @@
 # **Video Game Sales Analysis Project**
 
----
-
 This project was first developed in a jupyter notebook and then reformatted within Visual Studio Code before being imported into the GitHub repository. <br>
 
 ---
