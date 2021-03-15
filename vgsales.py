@@ -26,7 +26,7 @@ def plot_global_genres(data):
     fig.update_layout(font_family="Rockwell",
                       title_text='Global Genre Popularity',
                       title_x=0.5, showlegend=False)
-    fig.write_image('global_genres.png')
+    fig.write_image('images/global_genres.png')
 
 
 def plot_global_esrb(data):
@@ -42,7 +42,7 @@ def plot_global_esrb(data):
     fig.update_layout(font_family="Rockwell",
                       title_text='Global ESRB Popularity',
                       title_x=0.5, showlegend=False)
-    fig.write_image('global_esrbs.png')
+    fig.write_image('images/global_esrbs.png')
 
 
 def plot_global_publishers(data):
@@ -60,7 +60,7 @@ def plot_global_publishers(data):
                  template='plotly_white',
                  labels={'Global_Sales': 'Global Sales (Millions)'})
     fig.update_layout(font_family="Rockwell", title_x=0.5)
-    fig.write_image('global_publishers.png')
+    fig.write_image('images/global_publishers.png')
 
 
 def plot_na_genres(data):
@@ -74,7 +74,7 @@ def plot_na_genres(data):
     fig.update_layout(font_family="Rockwell",
                       title_text='Genre Popularity in North America',
                       title_x=0.5, showlegend=False)
-    fig.write_image('north_american_genres.png')
+    fig.write_image('images/north_american_genres.png')
 
 
 def plot_eu_genres(data):
@@ -88,7 +88,7 @@ def plot_eu_genres(data):
     fig.update_layout(font_family="Rockwell",
                       title_text='Genre Popularity in Europe',
                       title_x=0.5, showlegend=False)
-    fig.write_image('eurpoean_genres.png')
+    fig.write_image('images/european_genres.png')
 
 
 def plot_jp_genres(data):
@@ -102,7 +102,7 @@ def plot_jp_genres(data):
     fig.update_layout(font_family="Rockwell",
                       title_text='Genre Popularity in Japan',
                       title_x=0.5, showlegend=False)
-    fig.write_image('japanese_genres.png')
+    fig.write_image('images/japanese_genres.png')
 
 
 def plot_top_publishers_regional(data):
@@ -134,7 +134,7 @@ def plot_top_publishers_regional(data):
                  barmode='group', template='plotly_white')
     fig.update_layout(font_family="Rockwell",
                       title_text='Regional Publisher Popularity', title_x=0.5)
-    fig.write_image('top_publishers_regional.png')
+    fig.write_image('images/top_publishers_regional.png')
 
 
 def plot_critic_correlation(data):
@@ -154,7 +154,7 @@ def plot_critic_correlation(data):
     fig.add_annotation(text='Wii Sports!', x=7.7, y=82.86, arrowhead=1,
                        showarrow=True)
     fig.update_layout(font_family="Rockwell", title_x=0.5)
-    fig.write_image('critic_sales_correlation.png')
+    fig.write_image('images/critic_sales_correlation.png')
 
 
 def predict_country(data):
@@ -215,12 +215,12 @@ def predict_sales(data):
     test_predictions = model.predict(features_test)
     train_error = mean_squared_error(labels_train, train_pred)
     test_error = mean_squared_error(labels_test, test_predictions)
-    print("Train error:", train_error, "Test_error:", test_error)
+    print("Train Error:", train_error, "Test Error:", test_error)
 
 
 def main():
     # Import, format, and merge data frames
-    vgsales_2019_df = pd.read_csv('vgsales-12-4-2019.csv')
+    vgsales_2019_df = pd.read_csv('data/vgsales-12-4-2019.csv')
     vgsales_2019_df['Name'] = vgsales_2019_df['Name'] + ' ' + '(' + \
         vgsales_2019_df['Platform'] + ')'
     vgsales_2019_df = vgsales_2019_df.filter(['Name', 'Genre', 'ESRB_Rating',
@@ -228,7 +228,7 @@ def main():
                                               'Developer', 'Critic_Score',
                                               'User_Score', 'Total_Shipped',
                                               'Year'])
-    vgsales_2016_df = pd.read_csv('vgsales.csv')
+    vgsales_2016_df = pd.read_csv('data/vgsales.csv')
     vgsales_2016_df['Name'] = vgsales_2016_df['Name'] + ' ' + '(' + \
         vgsales_2016_df['Platform'] + ')'
     vgsales_2016_df = vgsales_2016_df.filter(['Name', 'NA_Sales', 'EU_Sales',
