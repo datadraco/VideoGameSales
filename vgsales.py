@@ -192,7 +192,9 @@ def predict_country(data):
     train_acc = accuracy_score(labels_train, train_pred)
     test_predictions = model.predict(features_test)
     test_acc = accuracy_score(labels_test, test_predictions)
-    print("Train Accuracy:", train_acc, "Test Accuracy:", test_acc)
+    print("Predicting Region With Most Sales:")
+    print("Classifier Train Accuracy:", train_acc, "Classifier Test Accuracy:",
+          test_acc)
     plt.figure(figsize=[15, 7], dpi=300)
     tree.plot_tree(model, max_depth=2, filled=True, proportion=True)
     plt.savefig('images/decision_tree.png')
@@ -220,7 +222,9 @@ def predict_sales(data):
     test_predictions = model.predict(features_test)
     train_error = mean_squared_error(labels_train, train_pred)
     test_error = mean_squared_error(labels_test, test_predictions)
-    print("Train Error:", train_error, "Test Error:", test_error)
+    print("Predicting Total Sales:")
+    print("Regressor Train Error:", train_error, "Regressor Test Error:",
+          test_error)
 
 
 def main():
