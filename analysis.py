@@ -6,6 +6,7 @@ and machine learning models in order to get a better grasp on what determines
 a video games success globally and regionally.
 """
 
+from import_data import data
 import pandas as pd
 import plotly.express as px
 from matplotlib import pyplot as plt
@@ -228,23 +229,7 @@ def predict_sales(data):
 
 
 def main():
-    # Import, format, and merge data frames
-    vgsales_2019_df = pd.read_csv('data/vgsales-12-4-2019.csv')
-    vgsales_2019_df['Name'] = vgsales_2019_df['Name'] + ' ' + '(' + \
-        vgsales_2019_df['Platform'] + ')'
-    vgsales_2019_df = vgsales_2019_df.filter(['Name', 'Genre', 'ESRB_Rating',
-                                              'Platform', 'Publisher',
-                                              'Developer', 'Critic_Score',
-                                              'User_Score', 'Total_Shipped',
-                                              'Year'])
-    vgsales_2016_df = pd.read_csv('data/vgsales.csv')
-    vgsales_2016_df['Name'] = vgsales_2016_df['Name'] + ' ' + '(' + \
-        vgsales_2016_df['Platform'] + ')'
-    vgsales_2016_df = vgsales_2016_df.filter(['Name', 'NA_Sales', 'EU_Sales',
-                                              'JP_Sales', 'Other_Sales',
-                                              'Global_Sales'])
-    merged_df = vgsales_2019_df.merge(vgsales_2016_df, left_on='Name',
-                                      right_on='Name', how='left')
+    merged_df = data()
     plot_global_genres(merged_df)
     plot_global_esrb(merged_df)
     plot_global_publishers(merged_df)
