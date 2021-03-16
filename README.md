@@ -15,7 +15,7 @@ In order to run the code correctly within VS Code, we needed to make sure that a
 
 The machine learning analysis makes use of regressor and classifier models from `scikit-learn`, all of which are imported in the top of the `vgsales.py` file.
 
-In order to properly access the data files and save the images within VS code, the root folder for the GitHub repository must be opened within VS Code as a workspace.
+In order to properly access the data files and save the images within VS code, the root folder for the GitHub repository (or the folder containing all folders within the zipped file of the GitHub repository) must be opened within VS Code as a workspace.
 
 ---
 
