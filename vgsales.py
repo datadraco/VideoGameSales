@@ -8,11 +8,13 @@ a video games success globally and regionally.
 
 import pandas as pd
 import plotly.express as px
+from matplotlib import pyplot as plt
 from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.metrics import accuracy_score
 from sklearn.tree import DecisionTreeRegressor
 from sklearn.metrics import mean_squared_error
+from sklearn import tree
 
 
 def plot_global_genres(data):
@@ -191,6 +193,9 @@ def predict_country(data):
     test_predictions = model.predict(features_test)
     test_acc = accuracy_score(labels_test, test_predictions)
     print("Train Accuracy:", train_acc, "Test Accuracy:", test_acc)
+    plt.figure(figsize=[15, 7], dpi=300)
+    tree.plot_tree(model, max_depth=2, filled=True, proportion=True)
+    plt.savefig('images/decision_tree.png')
 
 
 def predict_sales(data):
