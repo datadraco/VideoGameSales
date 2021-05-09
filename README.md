@@ -2,7 +2,7 @@
 
 This repository contains the code written for an assignment completed for the CSE 163 course at the University of Washington in March of 2021
 
---
+---
 
 This project was first developed in a jupyter notebook and then reformatted within Visual Studio Code before being imported into the GitHub repository. <br>
 
